@@ -10,7 +10,6 @@ needs in this repository.
 For starters, some reading:
 
 - https://www.thomasmaurer.ch/2019/05/how-to-configure-windows-sandbox/
-- https://techcommunity.microsoft.com/t5/Windows-Kernel-Internals/Windows-Sandbox-Config-Files/ba-p/354902
 - https://winaero.com/blog/enable-windows-10-sandbox-powershell-dism/
 - https://winaero.com/blog/enable-windows-sandbox-in-windows-10-home/
 
@@ -44,3 +43,28 @@ so `msiexec /i` won't work and I have not found a way to install the .NET Core
 SDK without PowerShell or Chocolatey (which requires PowerShell).
 
 https://gunnarpeipman.com/net/dotnet-core-windows-sandbox/
+
+## Exploring WSB Starter File
+
+https://techcommunity.microsoft.com/t5/Windows-Kernel-Internals/Windows-Sandbox-Config-Files/ba-p/354902
+
+The user account in the Sandbox is `WDAGUtilityAccount`.
+
+- `VGpu`
+  - `Disable` means to use WARP - DirectX software renderer
+  - `Default` means to use vGPU - virtualized hardware renderer
+- `Networking`: `Disable` & `Default` (virtual switch on the host connected to using virtual NIC on the guest)
+- `MappedFolders`: mapped to `C:\Users\WDAGUtilityAccount\Desktop`
+  - `MappedFolder`
+    - `HostFolder`: host path
+    - `ReadOnly`: `true` or `false`
+- `LogonCommand`:
+  - `Command`: a simple script inline or a path to a script file or an executable
+
+Examples:
+
+- `open-host-downloads-in-guest.wsb`
+- `install-vs-code.wsb`
+  - Close Explorer opened after VS Code installer - installer switch or automation command
+  - Pin VS Code to taskbar
+  - Close the command prompt after the installer has completed
