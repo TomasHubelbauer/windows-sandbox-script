@@ -68,3 +68,8 @@ Examples:
   - Close Explorer opened after VS Code installer - installer switch or automation command
   - Pin VS Code to taskbar
   - Close the command prompt after the installer has completed
+
+- Figure out how to auto-hide taskbar
+- Figure out how to pin to the taskbar: https://stackoverflow.com/a/46593836/2715716 & https://stackoverflow.com/a/9074483/2715716
+- Figure out how to show extensions
+- Figure out how to install SQLite
